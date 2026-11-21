@@ -29,7 +29,7 @@ MAE is the average miss in AQI points. RMSE is like MAE, but big misses count ex
 - Today's AQI matters most. Next come the wind, the county and the time of year.
 - Cuyahoga (average AQI 56.2) and Butler (55.3) have the worst air. Belmont (29.8) has the best air. This counts the 36 counties with at least 365 days of data (Kruskal-Wallis test, p < 0.001).
 - The air also changes with the time of year. The poster has the numbers.
-- **The models are good on typical days, not on spikes.** All 109 test days with an AQI above 100 were missed.
+- **The models are good on typical days, not on spikes.** All 109 test days with an AQI above 100 were missed: the tuned forest never guessed above 100 on those days.
 
 ![Permutation importance of the tuned forest](figures/AQI_Poster_Feature_Importance.png)
 
@@ -107,7 +107,7 @@ The pollutant behind the AQI is ozone in 53.2% of the rows and PM2.5 in 44.2%.
 - **Answer:** tomorrow's AQI in the same county.
 - **Clues (20 in the poster models):** today's AQI and the AQI 1, 2 and 6 days ago, the mean of the last 3 and of the last 7 days, the day of the year and the day of the week, whether ozone was today's main pollutant, the wind direction, the county's usual AQI, and 7 weather columns (two temperatures, rain, wind speed, wind gust, humidity, sunlight).
 - **Split by date:** train on days before 2025 (33,669 rows), test on 2025 to May 2026 (14,596 rows). The "very simple" and "simplest" notebooks use only 12 clues.
-- **Models:** the baseline "tomorrow = today", Ridge regression, random forest A (default settings), random forest B (300 trees, depth 12), Hist Gradient Boosting, and a tuned random forest (random search with 25 tries and cross-validation that keeps the days in time order).
+- **Models:** the baseline "tomorrow = today", Ridge regression, random forest A (default settings), random forest B (300 trees, depth 12), Hist Gradient Boosting, and a tuned random forest (random search with 25 tries and cross-validation that keeps the days in time order). The search picked 400 trees, depth 16, at least 10 rows per leaf and 70% of the clues per split.
 - **Scores:** MAE, RMSE and R² on the test days.
 
 ## Run it
