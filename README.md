@@ -151,4 +151,4 @@ The files the scripts write (`results.json`, `fig_*.png`) are ignored by git.
 
 ## Credits
 
-Data: US EPA AirData. The code and the notebooks were written with help from Claude (Anthropic).
+Data: US EPA AirData.
