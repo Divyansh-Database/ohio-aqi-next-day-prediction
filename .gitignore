@@ -1,0 +1,7 @@
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+
+# files the scripts write when you run them
+results.json
+fig_*.png
